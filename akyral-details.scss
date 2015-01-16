@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.akyral-details--container {
+  height: 0;
+  overflow: hidden;
+  transition: height .3s;
+}
+
+.akyral-details--content {
+  overflow: auto;
+  transition: transform .3s;
+  transform: translate3d(0, 33%, 0);
+
+  :host([open]) & {
+    transform: translate3d(0, 0, 0);
+  }
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>akyral-waypoint</title>
+
+    <script src="../../webcomponentsjs/webcomponents.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../sinon/index.js"></script>
+
+    <link rel="import" href="../akyral-details.html">
+  </head>
+
+  <body>
+
+    <akyral-details>
+      Culpa ad qui id do occaecat quis non voluptate voluptate
+      incididunt. Culpa non fugiat aliqua cupidatat et dolor laborum aliquip.
+      Ipsum laboris nisi dolore exercitation irure aute ex veniam aliquip proident
+      dolor adipisicing et. Enim est eu et esse non. Sunt magna duis sint dolor
+      ipsum nulla deserunt culpa officia anim elit qui. Cupidatat aliqua
+      exercitation elit officia aliqua nisi aliqua in ad ullamco. Occaecat
+      pariatur do velit reprehenderit veniam cillum. Anim pariatur voluptate
+      voluptate voluptate aute culpa. Reprehenderit pariatur nostrud sint anim
+      ipsum ad cupidatat enim pariatur quis consequat ad commodo.
+    </akyral-details>
+
+    <script>
+      var el = document.createElement('akyral-details');
+
+      suite('<akyral-waypoint>', function() {
+        test('should define the "author" property', function() {
+          assert.equal(el.author, 'Filipe Araujo');
+        });
+
+        test('should allow for adding a single author', function() {
+          el.author = 'New Author';
+          assert.include(el.author, 'New Author');
+          assert.lengthOf(el.author, 2);
+        });
+
+        test('should allow for adding an multiple authors', function() {
+          el.author = ['New Author 2', 'New Author 3'];
+          assert.include(el.author, 'New Author 2');
+          assert.include(el.author, 'New Author 3');
+          assert.lengthOf(el.author, 4);
+
+          assert.include(el.author, 'Filipe Araujo');
+        });
+
+        test('should still include the original authors', function() {
+          assert.include(el.author, 'Filipe Araujo');
+        });
+
+        test('should add the "open" attribute when set to opened',
+        function(done) {
+          el.open = true;
+
+          flush(function(){
+            assert.isTrue(el.hasAttribute('open'));
+            done();
+          });
+        });
+
+        test('should remove the "open" attribute when closed',
+        function(done) {
+          el.open = false;
+
+          flush(function(){
+            assert.isFalse(el.hasAttribute('open'));
+            done();
+          });
+        });
+      });
+    </script>
+  </body>
+
+</html>
