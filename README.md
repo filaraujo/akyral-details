@@ -1,4 +1,4 @@
-akyral-waypoint
+akyral-details
 ==
 
 Web component which opens to show hidden content
