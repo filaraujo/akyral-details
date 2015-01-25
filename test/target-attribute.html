@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>akyral-details</title>
+
+    <script src="../../webcomponentsjs/webcomponents.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../sinon/index.js"></script>
+
+    <link rel="import" href="../akyral-details.html">
+  </head>
+
+  <body>
+
+    <button id="button1">button 1</button>
+    <button id="button2">button 2</button>
+
+    <akyral-details id="details">
+      Culpa ad qui id do occaecat quis non voluptate voluptate
+      incididunt. Culpa non fugiat aliqua cupidatat et dolor laborum aliquip.
+      Ipsum laboris nisi dolore exercitation irure aute ex veniam aliquip proident
+      dolor adipisicing et. Enim est eu et esse non. Sunt magna duis sint dolor
+      ipsum nulla deserunt culpa officia anim elit qui. Cupidatat aliqua
+      exercitation elit officia aliqua nisi aliqua in ad ullamco. Occaecat
+      pariatur do velit reprehenderit veniam cillum. Anim pariatur voluptate
+      voluptate voluptate aute culpa. Reprehenderit pariatur nostrud sint anim
+      ipsum ad cupidatat enim pariatur quis consequat ad commodo.
+    </akyral-details>
+
+    <script>
+      var el = document.querySelector('#details');
+      var button1 = document.querySelector('#button1');
+      var button2 = document.querySelector('#button2');
+      var evt = new CustomEvent('click', {});
+
+      suite('<akyral-details>', function() {
+
+        test('should open the details element when the target is clicked',
+        function(done) {
+          el.target = button1;
+
+          flush(function() {
+            button1.dispatchEvent(evt);
+
+            flush(function(){
+              assert.isTrue(el.hasAttribute('open'));
+              done();
+            });
+          });
+        });
+
+        test('should open the details element when the target is changed',
+        function(done) {
+          el.target = button2;
+
+          flush(function() {
+            button2.dispatchEvent(evt);
+
+            flush(function() {
+              assert.isFalse(el.hasAttribute('open'));
+              done();
+            });
+          });
+        });
+
+        test('should not open the details element when the old target is clicked',
+        function(done) {
+          button1.dispatchEvent(evt);
+
+          flush(function(){
+            assert.isFalse(el.hasAttribute('open'));
+            done();
+          });
+        });
+
+      });
+    </script>
+  </body>
+
+</html>

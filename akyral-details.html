@@ -22,7 +22,7 @@ is optional
 
 Example:
 
-    <akyral-details open>
+    <akyral-details>
       <akyral-summary>Toggle Me</akyral-summary>
       ...
     </akyral-details>
@@ -35,6 +35,17 @@ Example:
     <akyral-details open>
       ...
       contents will be shown
+      ...
+    </akyral-details>
+
+## Target
+The `target` attribute will bind a click event to the provided element
+that toggles the details.
+
+Example:
+
+    <button id="el"></button>
+    <akyral-details target="{{ $.el }}">
       ...
     </akyral-details>
 
@@ -51,7 +62,10 @@ Example:
       <content select="akyral-summary"></content>
     </div>
 
-    <div id="container" class="akyral-details--container">
+    <div
+      aria-hidden="{{ open ? false : true }}"
+      class="akyral-details--container"
+      id="container">
       <div id="content" class="akyral-details--content">
         <content></content>
       </div>
@@ -65,6 +79,16 @@ Example:
       Polymer('akyral-details', {
 
         publish: {
+          /**
+           * The `target` defines the an element that when clicked will toggle
+           * the detail element.
+           *
+           * @attribute target
+           * @type object
+           * @default undefined
+           */
+          target: undefined,
+
           /**
            * The `open` defines the state of the details. A value of true
            * will expose the contents of the details
@@ -99,12 +123,28 @@ Example:
         },
 
         /**
+         * The `targetChanged` method is triggered whenever target
+         * is changed. It will unbind old target event listener
+         * and will add event listeners to new targets.
+         *
+         * @method targetChanged
+         */
+        targetChanged: function(oldEl, newEl) {
+          if (oldEl) {
+            oldEl.removeEventListener('click', this.oldHandler);
+          }
+
+          this.oldHandler = this.toggle.bind(this);
+          newEl.addEventListener('click', this.oldHandler);
+        },
+
+        /**
          * The `toggle` method allows for toggling between open and closed
          * states
          *
          * @method toggle
          */
-        toggle: function(){
+        toggle: function() {
           this.open = !this.open;
         },
 
@@ -114,7 +154,7 @@ Example:
          *
          * @method openChanged
          */
-        openChanged: function(){
+        openChanged: function() {
           var height = 0;
 
           if (this.open) {

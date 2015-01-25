@@ -27,10 +27,11 @@
 
 
     <template is="auto-binding">
-      <button on-click="{{ toggle }}">toggle details</button>
+      <button id="button" on-click="{{ toggle }}">toggle details</button>
 
-      <akyral-details id="details" open?="{{ open }}">
+      <akyral-details id="details" open?="{{ open }}" target="{{ $.button }}">
         <p>
+
           Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
           aute consequat non minim qui labore incididunt irure commodo. Consectetur ex sit
           aliquip id consequat ad et. Nulla proident cillum proident culpa est sunt
@@ -63,6 +64,7 @@
 
     <akyral-details>
       <akyral-summary>Toggle Me</akyral-summary>
+      <button name="button">button</button>
       <p>
         Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
         aute consequat non minim qui labore incididunt irure commodo. Consectetur ex sit
@@ -87,11 +89,11 @@
 
 
     <script>
-      var tmpl = document.querySelector('template[is="auto-binding"]');
-
-      tmpl.toggle = function(e){
-        this.$.details.open = !this.$.details.open;
-      }
+      // var tmpl = document.querySelector('template[is="auto-binding"]');
+      //
+      // tmpl.toggle = function(e){
+      //   this.$.details.open = !this.$.details.open;
+      // }
     </script>
 
   </body>
