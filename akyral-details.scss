@@ -6,12 +6,14 @@
   height: 0;
   overflow: hidden;
   transition: height .3s;
+  will-change: height;
 }
 
 .akyral-details--content {
   overflow: auto;
   transition: transform .3s;
   transform: translate3d(0, 33%, 0);
+  will-change: transform;
 
   :host([open]) & {
     transform: translate3d(0, 0, 0);
