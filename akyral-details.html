@@ -76,6 +76,16 @@ Example:
     (function() {
       var authors = ['Filipe Araujo'];
 
+      function update() {
+        var height = 0;
+
+        if (this.open) {
+          height = this.$.content.getBoundingClientRect().height + 'px';
+        }
+
+        this.$.container.style.height = height;
+      }
+
       Polymer('akyral-details', {
 
         publish: {
@@ -147,21 +157,13 @@ Example:
         toggle: function() {
           this.open = !this.open;
         },
-        
+
          /**
          * The `update` method adjusts the height of the details.
          *
          * @method update
          */
-        update: function() {
-          var height = 0;
-
-          if (this.open) {
-            height = this.$.content.getBoundingClientRect().height + 'px';
-          }
-
-          this.$.container.style.height = height;  
-        },
+        update: update,
 
         /**
          * The `openChanged` method is triggered when the open attribute has
@@ -169,9 +171,7 @@ Example:
          *
          * @method openChanged
          */
-        openChanged: function() {
-          this.update();
-        }
+        openChanged: update
       });
     }());
   </script>
