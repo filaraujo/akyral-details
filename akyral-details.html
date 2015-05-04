@@ -76,14 +76,25 @@ Example:
     (function() {
       var authors = ['Filipe Araujo'];
 
-      function update() {
-        var height = 0;
-
-        if (this.open) {
-          height = this.$.content.getBoundingClientRect().height + 'px';
+      function setHeight(height) {
+        if (!isNaN(height)) {
+          height = height + 'px';
         }
 
         this.$.container.style.height = height;
+      }
+
+      function update() {
+        if (this.open) {
+          this.height = this.$.content.getBoundingClientRect().height;
+          this.job('akyral-detail--update', setHeight.bind(this, 'auto'), 750);
+        }
+
+        setHeight.call(this, this.height);
+
+        if (!this.open) {
+          this.job('akyral-detail--update', setHeight.bind(this, 0), 16);
+        }
       }
 
       Polymer('akyral-details', {
