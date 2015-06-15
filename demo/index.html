@@ -9,8 +9,8 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>akyral-details Demo</title>
 
-    <script src="../webcomponentsjs/webcomponents.js"></script>
-    <link rel="import" href="akyral-details.html">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../akyral-details.html">
 
     <style>
       body {
@@ -23,30 +23,28 @@
 
   </head>
 
-  <body unresolved>
+  <body>
 
+    <template is="dom-bind">
+      <button id="button" on-click="toggle">toggle details</button>
 
-    <template is="auto-binding">
-      <button id="button" on-click="{{ toggle }}">toggle details</button>
-
-      <akyral-details id="details" open?="{{ open }}" target="{{ $.button }}">
+      <akyral-details id="details" open$="{{open}}">
         <p>
-
-          Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
+          1. Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
           aute consequat non minim qui labore incididunt irure commodo. Consectetur ex sit
           aliquip id consequat ad et. Nulla proident cillum proident culpa est sunt
           reprehenderit ex elit dolore eu officia mollit.
         </p>
 
         <p>
-          Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
+          2. Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
           aute consequat non minim qui labore incididunt irure commodo. Consectetur ex sit
           aliquip id consequat ad et. Nulla proident cillum proident culpa est sunt
           reprehenderit ex elit dolore eu officia mollit.
         </p>
 
         <p>
-          Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
+          3. Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
           aute consequat non minim qui labore incididunt irure commodo. Consectetur ex sit
           aliquip id consequat ad et. Nulla proident cillum proident culpa est sunt
           reprehenderit ex elit dolore eu officia mollit.
@@ -56,7 +54,7 @@
     </template>
 
     <p>
-      Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
+      4. Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
       aute consequat non minim qui labore incididunt irure commodo. Consectetur ex sit
       aliquip id consequat ad et. Nulla proident cillum proident culpa est sunt
       reprehenderit ex elit dolore eu officia mollit.
@@ -66,21 +64,21 @@
       <akyral-summary>Toggle Me</akyral-summary>
       <button name="button">button</button>
       <p>
-        Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
+        5. Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
         aute consequat non minim qui labore incididunt irure commodo. Consectetur ex sit
         aliquip id consequat ad et. Nulla proident cillum proident culpa est sunt
         reprehenderit ex elit dolore eu officia mollit.
       </p>
 
       <p>
-        Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
+        6. Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
         aute consequat non minim qui labore incididunt irure commodo. Consectetur ex sit
         aliquip id consequat ad et. Nulla proident cillum proident culpa est sunt
         reprehenderit ex elit dolore eu officia mollit.
       </p>
 
       <p>
-        Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
+        7. Aliquip est eu dolore voluptate dolore duis. Minim eu Lorem sint exercitation ut
         aute consequat non minim qui labore incididunt irure commodo. Consectetur ex sit
         aliquip id consequat ad et. Nulla proident cillum proident culpa est sunt
         reprehenderit ex elit dolore eu officia mollit.
@@ -89,11 +87,11 @@
 
 
     <script>
-      // var tmpl = document.querySelector('template[is="auto-binding"]');
-      //
-      // tmpl.toggle = function(e){
-      //   this.$.details.open = !this.$.details.open;
-      // }
+      var tmpl = document.querySelector('template[is="dom-bind"]');
+
+      tmpl.toggle = function(e){
+        this.$.details.open = !this.$.details.open;
+      }
     </script>
 
   </body>
