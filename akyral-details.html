@@ -54,16 +54,18 @@ Example:
 @demo http://filaraujo.github.io/akyral.io/details/index.html
 @homepage https://github.com/filaraujo/akyral-details
 -->
-<polymer-element name="akyral-details">
-  <template>
-    <link rel="stylesheet" href="akyral-details.css" />
+<dom-module id="akyral-details">
 
-    <div on-click="{{ toggle }}">
+  <link rel="import" type="css" href="akyral-details.css" />
+
+  <template>
+
+    <div on-click="toggle">
       <content select="akyral-summary"></content>
     </div>
 
     <div
-      aria-hidden="{{ open ? false : true }}"
+      aria-hidden="{{!open}}"
       class="akyral-details--container"
       id="container">
       <div id="content" class="akyral-details--content">
@@ -87,40 +89,34 @@ Example:
       function update() {
         if (this.open) {
           this.height = this.$.content.getBoundingClientRect().height;
-          this.job('akyral-detail--update', setHeight.bind(this, 'auto'), 750);
+          this.debounce('akyral-detail--update', setHeight.bind(this, 'auto'), 750);
         }
 
         setHeight.call(this, this.height);
 
         if (!this.open) {
-          this.job('akyral-detail--update', setHeight.bind(this, 0), 16);
+          this.debounce('akyral-detail--update', setHeight.bind(this, 0), 16);
         }
       }
 
-      Polymer('akyral-details', {
+      Polymer({
+        is: 'akyral-details',
 
-        publish: {
+        properties: {
           /**
            * The `target` defines the an element that when clicked will toggle
            * the detail element.
-           *
-           * @attribute target
-           * @type object
-           * @default undefined
            */
-          target: undefined,
+          target: Object,
 
           /**
            * The `open` defines the state of the details. A value of true
            * will expose the contents of the details
-           *
-           * @attribute open
-           * @type boolean
-           * @default false
            */
           open: {
-            reflect: true,
-            value: false
+            type: Boolean,
+            reflectToAttribute: true,
+            observer: 'update'
           }
         },
 
@@ -175,15 +171,7 @@ Example:
          * @method update
          */
         update: update,
-
-        /**
-         * The `openChanged` method is triggered when the open attribute has
-         * been modified.
-         *
-         * @method openChanged
-         */
-        openChanged: update
       });
     }());
   </script>
-</polymer-element>
+</dom-module>
