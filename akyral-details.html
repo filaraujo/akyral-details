@@ -104,7 +104,10 @@ Example:
            * The `target` defines the an element that when clicked will toggle
            * the detail element.
            */
-          target: Object,
+          target: {
+            observer: 'targetChanged',
+            type: Object  
+          }
 
           /**
            * The `open` defines the state of the details. A value of true
@@ -143,7 +146,7 @@ Example:
          *
          * @method targetChanged
          */
-        targetChanged: function(oldEl, newEl) {
+        targetChanged: function(newEl, oldEl) {
           if (oldEl) {
             oldEl.removeEventListener('click', this.oldHandler);
           }
