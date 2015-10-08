@@ -76,17 +76,22 @@ Example:
       var authors = ['Filipe Araujo'];
 
       function setHeight(height) {
+        var container = this.$.container;
+
         if (!isNaN(height)) {
           height = height + 'px';
         }
 
-        this.$.container.style.height = height;
+        container.removeAttribute('no-fx');
+        container.style.height = height;
       }
 
       function update() {
         if (this.open) {
           this.height = this.$.content.getBoundingClientRect().height;
-          this.debounce('akyral-detail--update', setHeight.bind(this, 'auto'), 750);
+          this.debounce('akyral-detail--update', function() {
+            this.$.container.setAttribute('no-fx', '');
+          }, 750);
         }
 
         setHeight.call(this, this.height);
