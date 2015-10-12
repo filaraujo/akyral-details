@@ -9,6 +9,7 @@
   will-change: height;
 
   &[no-fx] {
+    height: auto !important;
     overflow: auto;
     transition: none;
   }
