@@ -58,7 +58,7 @@ Example:
   <template>
 
     <div on-click="toggle">
-      <content select="akyral-summary"></content>
+      <slot name="akyral-summary" old-content-selector="akyral-summary"></slot>
     </div>
 
     <div
@@ -66,7 +66,7 @@ Example:
       class="akyral-details--container"
       id="container">
       <div id="content" class="akyral-details--content">
-        <content></content>
+        <slot></slot>
       </div>
     </div>
 
